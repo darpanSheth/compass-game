@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="author" content="Darpan">
+    <title>Compass Game</title>
+    <link rel="icon" href="images/Shortcut Icon.png">
+    <style>
+        .table{
+            display: table;
+            border-spacing: 30px;
+        }
+        section > div{
+            display: table-row;
+        }
+        div > input, div > h1{
+            display: table-cell;
+        }
+        div > h1{
+            color: red;
+            text-align: center;
+            font-size: 2rem;
+        }
+        .diagonal{
+            transform: rotate(-45deg);
+        }
+        #italic{
+            font-style: italic;
+        }
+    </style>
+    <script>
+        function swapTopLeftDirection(){
+            var temporaryDirection1;
+            var temporaryDirection2;
+            temporaryDirection1 = document.getElementById("topDirection").innerHTML;
+            temporaryDirection2 = document.getElementById("leftDirection").innerHTML;
+            document.getElementById("leftDirection").innerHTML = temporaryDirection1;
+            document.getElementById("topDirection").innerHTML = temporaryDirection2;
+        }
+        function swapLeftRightDirection(){
+            var temporaryDirection1;
+            var temporaryDirection2;
+            temporaryDirection1 = document.getElementById("rightDirection").innerHTML;
+            temporaryDirection2 = document.getElementById("leftDirection").innerHTML;
+            document.getElementById("leftDirection").innerHTML = temporaryDirection1;
+            document.getElementById("rightDirection").innerHTML = temporaryDirection2;
+        }
+        function swapBottomRightDirection(){
+            var temporaryDirection1;
+            var temporaryDirection2;
+            temporaryDirection1 = document.getElementById("rightDirection").innerHTML;
+            temporaryDirection2 = document.getElementById("bottomDirection").innerHTML;
+            document.getElementById("bottomDirection").innerHTML = temporaryDirection1;
+            document.getElementById("rightDirection").innerHTML = temporaryDirection2;
+        }
+        function restartCompassGame(){
+            document.getElementById("topDirection").innerHTML = "";
+            document.getElementById("leftDirection").innerHTML = "";
+            document.getElementById("rightDirection").innerHTML = "";
+            document.getElementById("bottomDirection").innerHTML = "";
+            document.getElementById("newTopDirection").disabled = false;
+            document.getElementById("newLeftDirection").disabled = false;
+            document.getElementById("newRightDirection").disabled = false;
+            document.getElementById("newBottomDirection").disabled = false;
+            document.getElementById("updateDirections").disabled = false;
+            document.getElementById("newTopDirection").focus();
+        }
+        function updateCompassGame(form){
+            document.getElementById("topDirection").innerHTML = document.getElementById("newTopDirection").value;
+            document.getElementById("leftDirection").innerHTML = document.getElementById("newLeftDirection").value
+            document.getElementById("rightDirection").innerHTML = document.getElementById("newRightDirection").value;
+            document.getElementById("bottomDirection").innerHTML = document.getElementById("newBottomDirection").value;
+            form.reset();
+            document.getElementById("newTopDirection").disabled = true;
+            document.getElementById("newLeftDirection").disabled = true;
+            document.getElementById("newRightDirection").disabled = true;
+            document.getElementById("newBottomDirection").disabled = true;
+            document.getElementById("updateDirections").disabled = true;
+        }
+        
+    </script>
+</head>
+<body>
+    <noscript>
+        <p>
+            Some funcitonality of this web page uses Javascript for displaying results.<br>
+            For proper and appropriate results, Please use the web browser which has Javascript enabled.
+        </p>
+    </noscript>
+    <h1>Compass Game</h1>
+    <p>The direction letters on the "compass" are scrambled. Press the arrows to properly position the direction letters.</p>
+    <section class="table">
+        <div>
+            <input type="button" value="<-->" class="diagonal" onclick="swapTopLeftDirection();">
+            <h1 id="topDirection">E</h1>
+        </div>
+        <div>
+            <h1 id="leftDirection">S</h1>
+            <input type="button" value="<-->" onclick="swapLeftRightDirection()";>
+            <h1 id="rightDirection">N</h1>
+        </div>
+        <div>
+            <h1></h1>
+            <h1 id="bottomDirection">W</h1>
+            <input type="button" value="<-->" class="diagonal" onclick="swapBottomRightDirection()";">
+        </div>
+    </section>
+    
+    <p>To restart the game, press <span id="italic">Restart</span>, enter N, S, E and W in any order in the boxes below, and then press <span id="italic">Update</span>.</p>
+    <form>
+        <input type="button" value="Restart" onclick="restartCompassGame();"><br><br>
+        Top:
+        <input type="text" size="1" maxlength="1" id="newTopDirection" disabled>
+        Left:
+        <input type="text" size="1" maxlength="1" id="newLeftDirection" disabled>
+        Right:
+        <input type="text" size="1" maxlength="1" id="newRightDirection" disabled>
+        Bottom:
+        <input type="text" size="1" maxlength="1" id="newBottomDirection" disabled> <br><br>
+        <input type="button" value="Update" id="updateDirections" disabled onclick="updateCompassGame(this.form);">
+    </form>
+    
+</body>
+</html>
